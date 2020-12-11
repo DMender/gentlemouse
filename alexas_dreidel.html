@@ -71,6 +71,7 @@
                 $("#p2").text("player 2: " + game_array[4] + " geld");
                 $("#p3").text("player 3: " + game_array[5] + " geld");
                 $("#p4").text("player 4: " + game_array[6] + " geld");
+                $("#turn").text("Player " + game_array[0] + "'s turn");
                 switch(game_array[1]) {
                     case 4:
                         $("#p4").show();
@@ -99,10 +100,11 @@
             }
             $("#newgame").click(function(){
                 game_array[1] = 0;
+                game_array[2] = 0;
                 pushserver();
             });
             $(".start").click(function(){
-                game_array[0] = true;
+                game_array[0] = 1;
                 game_array[1] = parseFloat($(this).val());
                 game_array[3] = 10;
                 game_array[4] = 10;
@@ -112,19 +114,68 @@
             });
             $("#spin").click(function(){
                 var roll = Math.floor((Math.random() * 4) + 1);
+                var counter = 0;
+                //game_array[2] = 0 //set the pot to zero for debug
+                if (game_array[2] == 0) { //if pot is zero start new round or win game
+                    if (game_array[3] > 0) {
+                        game_array[3] -= 1;
+                        game_array[2] += 1;
+                    } else {
+                        counter += 1
+                    }
+                    if (game_array[4] > 0) {
+                        game_array[4] -= 1;
+                        game_array[2] += 1;
+                    } else {
+                        counter += 1
+                    }
+                    
+                    if (game_array[5] > 0) {
+                        game_array[5] -= 1;
+                        game_array[2] += 1;
+                    } else {
+                        counter += 1
+                    }
+                    
+                    if (game_array[6] > 0) {
+                        game_array[6] -= 1;
+                        game_array[2] += 1;
+                    } else {
+                        counter += 1
+                    }
+                }
+                game_array[0] += 1; //next player
+                while (game_array[game_array[0] + 2] <= 0) {
+                    game_array[0] += 1
+                    if (game_array[0] > game_array[1]) {
+                        game_array[0] = 1;
+                    }
+                }
                 switch(roll) {
                     case 1: //gimmel - take the pot
                         $("#top").html("&#1490;");
+                        game_array[game_array[0] + 2] += game_array[2];
+                        game_array[2] = 0;
                         break;
-                    case 2: //hay - take half the pot
+                    case 2: //hay - take half the pot, round up
                         $("#top").html("&#1492;");
+                        game_array[game_array[0] + 2] += Math.ceil(game_array[2]/2);
+                        game_array[2] -= Math.ceil(game_array[2]/2);
                         break;
                     case 3: //shin - add a geld to the pot
                         $("#top").html("&#1513;");
+                        game_array[game_array[0] + 2] -= 1;
+                        game_array[2] += 1;
                         break;
                     default: //nun - nothing
                         $("#top").html("&#1504;");
                 }
+                if (counter == 3) {
+                    alert(counter);
+                    $("#top").html("Game Over! Player: " + game_array[game_array[0] + 2] + " wins!");
+                    $("#spin").hide();
+                }
+                pushserver();
             });
             setInterval(pullserver,30);
         });
