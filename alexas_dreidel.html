@@ -86,7 +86,11 @@ Server name (a-g): <input id="server" type="text" value="a" maxlength="1" size="
                 $("#p2").text("player 2: " + game_array[4] + " geld");
                 $("#p3").text("player 3: " + game_array[5] + " geld");
                 $("#p4").text("player 4: " + game_array[6] + " geld");
-                $("#turn").text("Player " + (game_array[0] + 1) + "'s turn");
+                var pturn = game_array[0] + 1;
+                if (pturn > 4) {
+                    pturn = 1;
+                }
+                $("#turn").text("Player " + pturn + "'s turn");
                 switch(game_array[1]) {
                     case 4:
                         $("#p4").show();
