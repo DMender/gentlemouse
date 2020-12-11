@@ -68,14 +68,16 @@
     <span id="p4">player 4: </span><hr/>
     <h2 id="turn">player #'s turn</h2>
     <button id="spin">SPIN!</button>
-</main>
+</main><br/>
+Server name (a - g): <input id="server" type="text" value="corgi" maxlength="1" size="3">
       <script>
         var game_array = new Array(8); //ready, players, pot, p1stack, p2stack, p3stack, p4stack, dreidel
         
         $(document).ready(function(){
             var database = firebase.database();
             function pullserver() {
-                database.ref('dreid/').on('value', (snapshot) =>{
+                var servername = $("#server").val();
+                database.ref(servername.toString()+"/").on('value', (snapshot) =>{
                     const data = snapshot.val();
                     game_array = JSON.parse(data);
                 });
@@ -108,7 +110,8 @@
                 }
             }
             function pushserver() {
-                database.ref('dreid/').set(JSON.stringify(game_array));
+                var servername = $("#server").val();
+                database.ref(servername.toString()+"/").set(JSON.stringify(game_array));
             }
             $("#newgame").click(function(){
                 game_array[1] = 0;
