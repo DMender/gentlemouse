@@ -35,9 +35,10 @@
             font-family: 'Langar', cursive;
             background-color: darkgreen;
             color: white;
+            text-align: center;
         }
         #top {
-            font-size: 5em;
+            font-size: 3em;
             margin: 0%;
         }
         main {
@@ -47,11 +48,15 @@
             border-radius: 20px;
             padding: 4em;
         }
+        button {
+            border-radius: 5px;
+            border: 3px solid white;
+        }
     </style>
   </head>
   <body>
       <main>
-      <h1>How many players?</h1><button id="newgame">New Game</button><br/>
+      <h1>How many players?</h1><hr/><button id="newgame">New Game</button><br/>
       <h2 id="top">&#1504;</h2>
     <button class="start" value="2">2</button>
     <button class="start" value="3">3</button>
@@ -60,7 +65,7 @@
     <span id="p1">player 1: </span><br/>
     <span id="p2">player 2: </span><br/>
     <span id="p3">player3: </span><br/>
-    <span id="p4">player 4: </span><br/>
+    <span id="p4">player 4: </span><hr/>
     <h2 id="turn">player #'s turn</h2>
     <button id="spin">SPIN!</button>
 </main>
@@ -184,7 +189,7 @@
                         $("#top").html("&#1504;");
                 }
                 if (counter == game_array[1]-1) {
-                    $("#top").html("Game Over! Player: " + game_array[0] + " wins!");
+                    $("#top").html("Game Over! Player " + game_array[0] + " wins!");
                     $("#spin").hide();
                 }
                 pushserver();
