@@ -33,7 +33,8 @@
         @import url('https://fonts.googleapis.com/css2?family=Langar&display=swap');
         * {
             font-family: 'Langar', cursive;
-            background-color: darkolivegreen;
+            background-color: darkgreen;
+            color: white;
         }
         #top {
             font-size: 5em;
@@ -44,6 +45,7 @@
             margin: auto;
             border: 3px solid white;
             border-radius: 20px;
+            padding: 4em;
         }
     </style>
   </head>
@@ -51,7 +53,6 @@
       <main>
       <h1>How many players?</h1><button id="newgame">New Game</button><br/>
       <h2 id="top">&#1504;</h2>
-    <button class="start" value="1">1</button>
     <button class="start" value="2">2</button>
     <button class="start" value="3">3</button>
     <button class="start" value="4">4</button><br/>
@@ -137,19 +138,21 @@
                     } else {
                         counter += 1
                     }
-                    
-                    if (game_array[5] > 0) {
-                        game_array[5] -= 1;
-                        game_array[2] += 1;
-                    } else {
-                        counter += 1
+                    if (game_array[1] = 3) {
+                        if (game_array[5] > 0) {
+                            game_array[5] -= 1;
+                            game_array[2] += 1;
+                        } else {
+                            counter += 1
+                        }
                     }
-                    
-                    if (game_array[6] > 0) {
-                        game_array[6] -= 1;
-                        game_array[2] += 1;
-                    } else {
-                        counter += 1
+                    if (game_array[1] = 4) {
+                        if (game_array[6] > 0) {
+                            game_array[6] -= 1;
+                            game_array[2] += 1;
+                        } else {
+                            counter += 1
+                        }
                     }
                 }
                 game_array[0] += 1; //next player
@@ -181,7 +184,7 @@
                     default: //nun - nothing
                         $("#top").html("&#1504;");
                 }
-                if (counter == 3) {
+                if (counter == game_array[1]-1) {
                     $("#top").html("Game Over! Player: " + game_array[0] + " wins!");
                     $("#spin").hide();
                 }
