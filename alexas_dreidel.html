@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-database.js"></script>
+
+    <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyCVfy8NBF_mPA9s3HqwN2GDYu0D6LPkxQU",
+        authDomain: "pico8-4c227.firebaseapp.com",
+        databaseURL: "https://pico8-4c227-default-rtdb.firebaseio.com",
+        projectId: "pico8-4c227",
+        storageBucket: "pico8-4c227.appspot.com",
+        messagingSenderId: "334543237103",
+        appId: "1:334543237103:web:03501e46cb47447b3ad01a"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <title>Alexa's Dreidel</title>
+    <style>
+        #top {
+            font-size: 5em;
+            margin: 0%;
+        }
+        main {
+            width: 33vw;
+            margin: auto;
+        }
+    </style>
+  </head>
+  <body>
+      <main>
+      <h1>How many players?</h1><button id="newgame">New Game</button><br/>
+      <h2 id="top">&#1504;</h2>
+    <button class="start" value="1">1</button>
+    <button class="start" value="2">2</button>
+    <button class="start" value="3">3</button>
+    <button class="start" value="4">4</button><br/>
+    <span id="pot">pot: </span><br/>
+    <span id="p1">player 1: </span><br/>
+    <span id="p2">player 2: </span><br/>
+    <span id="p3">player3: </span><br/>
+    <span id="p4">player 4: </span><br/>
+    <h2 id="turn">player #'s turn</h2>
+    <button id="spin">SPIN!</button>
+</main>
+      <script>
+        var game_array = new Array(8); //ready, players, pot, p1stack, p2stack, p3stack, p4stack, dreidel
+        
+        $(document).ready(function(){
+            var database = firebase.database();
+            function pullserver() {
+                database.ref('dreid/').on('value', (snapshot) =>{
+                    const data = snapshot.val();
+                    game_array = JSON.parse(data);
+                });
+                $("#pot").text("pot: " + game_array[2] + " geld");
+                $("#p1").text("player 1: " + game_array[3] + " geld");
+                $("#p2").text("player 2: " + game_array[4] + " geld");
+                $("#p3").text("player 3: " + game_array[5] + " geld");
+                $("#p4").text("player 4: " + game_array[6] + " geld");
+                switch(game_array[1]) {
+                    case 4:
+                        $("#p4").show();
+                    case 3:
+                        $("#p3").show();
+                    case 2:
+                        $("#p2").show();
+                    case 1:
+                        $("#p1").show();
+                        $("#spin").show();
+                        $(".start").hide();
+                        $("h1").text("Dreidel!");
+                        break;
+                    default:
+                        $("#spin").hide();
+                        $("#p1").hide();
+                        $("#p2").hide();
+                        $("#p3").hide();
+                        $("#p4").hide();
+                        $(".start").show();
+                        $("h1").text("How many players?");
+                }
+            }
+            function pushserver() {
+                database.ref('dreid/').set(JSON.stringify(game_array));
+            }
+            $("#newgame").click(function(){
+                game_array[1] = 0;
+                pushserver();
+            });
+            $(".start").click(function(){
+                game_array[0] = true;
+                game_array[1] = parseFloat($(this).val());
+                game_array[3] = 10;
+                game_array[4] = 10;
+                game_array[5] = 10;
+                game_array[6] = 10;
+                pushserver();
+            });
+            $("#spin").click(function(){
+                var roll = Math.floor((Math.random() * 4) + 1);
+                switch(roll) {
+                    case 1: //gimmel - take the pot
+                        $("#top").html("&#1490;");
+                        break;
+                    case 2: //hay - take half the pot
+                        $("#top").html("&#1492;");
+                        break;
+                    case 3: //shin - add a geld to the pot
+                        $("#top").html("&#1513;");
+                        break;
+                    default: //nun - nothing
+                        $("#top").html("&#1504;");
+                }
+            });
+            setInterval(pullserver,30);
+        });
+      </script>
+  </body>
+</html>
