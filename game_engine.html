@@ -13,7 +13,8 @@
     </head>
     <body onload="run()">
         <canvas id="frame" width="640" height="480"></canvas>
-        <p id="text">boing</p>
+        <p id="delta">boing</p>
+        <p id="fps">boing</p>
     </body>
     <script>
         function run() {
@@ -25,6 +26,7 @@
             let delta;
             let tick = 0;
             let fps = 60;
+            let actualfps;
 
             let pos = 0;
             
@@ -35,8 +37,10 @@
                 time = Date.now();
                 delta = time - lastTime;
                 lastTime = time;
-                document.getElementById("text").innerHTML = "Delta: " + delta;
+                document.getElementById("delta").innerHTML = "Delta: " + delta;
                 tick += delta;
+                actualfps = 1000/(lastTime - time);
+                document.getElementById("fps").innerHTML = "FPS: " + actualfps;
                 if (tick >= 1000/fps) {
                     tick = 0;
                     update(delta);
