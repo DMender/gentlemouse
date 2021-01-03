@@ -39,7 +39,7 @@
                 lastTime = time;
                 document.getElementById("delta").innerHTML = "Delta: " + delta;
                 tick += delta;
-                actualfps = 1000/(lastTime - time);
+                actualfps = 1000/delta;
                 document.getElementById("fps").innerHTML = "FPS: " + actualfps;
                 if (tick >= 1000/fps) {
                     tick = 0;
