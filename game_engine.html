@@ -41,6 +41,8 @@
                 tick += delta;
                 actualfps = 1000/delta;
                 document.getElementById("fps").innerHTML = "FPS: " + actualfps;
+                base_image = new Image();
+  base_image.src = 'https://www.iconsdb.com/icons/preview/gray/circle-xxl.png';
                 if (tick >= 1000/fps) {
                     tick = 0;
                     update(delta);
@@ -56,16 +58,7 @@ pos = 0;
                     }
                 ctx.clearRect(0, 0, canvas.width, canvas.height); 
                 ctx.font = "30px Arial";
-                make_base(pos);
-
-function make_base(xpos)
-{
-  base_image = new Image();
-  base_image.src = 'https://www.iconsdb.com/icons/preview/gray/circle-xxl.png';
-  base_image.onload = function(){
-    ctx.drawImage(base_image, 0+xpos, 0);
-  }
-}
+                ctx.drawImage(base_image, 0+xpos, 0);
                 ctx.fillText("Hello World", 10+pos, 50);
             }
 
