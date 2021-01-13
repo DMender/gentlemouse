@@ -51,6 +51,9 @@
             //logic
             function update(dt) {
                 pos += 10*dt*.01;
+                if (pos > 100) {
+pos = 0;
+                    }
                 ctx.clearRect(0, 0, canvas.width, canvas.height); 
                 ctx.font = "30px Arial";
                 make_base(pos);
@@ -58,7 +61,7 @@
 function make_base(xpos)
 {
   base_image = new Image();
-  base_image.src = 'https://www.iconsdb.com/icons/preview/gray/circle-xxl.png'
+  base_image.src = 'https://www.iconsdb.com/icons/preview/gray/circle-xxl.png';
   base_image.onload = function(){
     ctx.drawImage(base_image, 10+xpos, 100);
   }
