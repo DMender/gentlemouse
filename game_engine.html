@@ -53,6 +53,16 @@
                 pos += 10*dt*.01;
                 ctx.clearRect(0, 0, canvas.width, canvas.height); 
                 ctx.font = "30px Arial";
+                make_base(pos);
+
+function make_base(xpos)
+{
+  base_image = new Image();
+  base_image.src = 'https://media1.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif?cid=ecf05e47inpnbdjjphta2g0ztp35r11ksvhn999e41zk2yd4&rid=giphy.gif';
+  base_image.onload = function(){
+    ctx.drawImage(base_image, 10+xpos, 100);
+  }
+}
                 ctx.fillText("Hello World", 10+pos, 50);
             }
 
