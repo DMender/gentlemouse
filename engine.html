@@ -12,7 +12,7 @@
         </style>
     </head>
     <body onload="run()">
-        <canvas id="frame" width="640" height="480"></canvas>
+        <canvas id="frame" width="480" height="480"></canvas>
         <p id="delta">boing</p>
     </body>
     <script>
@@ -20,31 +20,37 @@
             //init variables
             var canvas = document.getElementById("frame");
             var ctx = canvas.getContext("2d");
-            let time = Date.now();
-            let lastTime = time;
-            let delta;
+            let time, lastTime, delta;
+
+            let pos = 0;
 
             //loop and delta
             gameLoop();
-            function gameLoop() {
-                requestAnimationFrame(gameLoop);
-                time = Date.now();
+            function gameLoop(time) {
                 delta = time - lastTime;
                 lastTime = time;
                 document.getElementById("delta").innerHTML = "Delta: " + delta;
-                base_image = new Image();
-                base_image.src = 'https://www.iconsdb.com/icons/preview/gray/circle-xxl.png';
                 update(delta);
                 draw(delta);
+                requestAnimationFrame(gameLoop);
             }
 
             //logic
             function update(dt) {
+                pos += 1;
+                if (pos > 250) {
+                    pos = 0;
+                }
             }
 
             //draw
             function draw(dt) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height); 
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.beginPath();
+                ctx.arc(100 + pos, 100 + pos, 20, 0, Math.PI*2, false);
+                ctx.fillStyle = "green";
+                ctx.fill();
+                ctx.closePath();
             }
         }
     </script>
