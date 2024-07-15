@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Charlie Cook | Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $(document).on('click', function(event) {
+        $('.full').removeClass('full');
+        if ($(event.target).is('img')) {
+          $(event.target).addClass('full');
+          $('html, body').animate({
+            scrollTop: $(event.target).offset().top-10
+          }, 500);
+        } else {
+          $('html, body').animate({
+            scrollTop: 0
+          }, 500);
+        }
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <h1>Charlie Cook</h1>
+  <h2>AndrewCookWebDeveloper@gmail.com | 801.897.4120</h2>
+  <br><br>
+  <div class="container">
+  <img src="img/hyrule.jpg" alt="pen on skin of the Hyrule crest">
+  <img src="img/dandelion.jpg" alt="a dandelion losing its seeds in the breeze">
+  <img src="img/flower.jpg" alt="a sunflower">
+  <img src="img/shoes.jpg" alt="an octopus drawn on canvas shoes">
+  <img src="img/watermelon.png" alt="a splatoon octoling in a cute hat">
+  <img src="img/cherry.png" alt="a splatoon inkling wearing a bamboo hat">
+  <img src="img/beetle.png" alt="crystaline beetle pushing the world">
+  <img src="img/birdwell.png" alt="an etching of norman birdwell in the style of norman rockwell">
+  <img src="img/pokemon.jpg" alt="a bellsprout kicking a pikachu">
+  <img src="img/mask.jpg" alt="a samurai mask">
+  <img src="img/fan.jpg" alt="a paper fan">
+  <img src="img/catdog.png" alt="catdog">
+  <img src="img/id10.jpg" alt="id10 from starwars">
+  <img src="img/id9.jpg" alt="id9 from starwars">
+  <img src="img/betta.png" alt="a sniper anthropomorphic betta fish">
+  <img src="img/knight.png" alt="the corrupted knight from Hollow Knight">
+  <img src="img/shrimp.jpg" alt="a shrimp mermaid">
+  <img src="img/sad.png" alt="the chimera from fullmetal alchemist">
+  <img src="img/lemon.jpg" alt="lemongrab">
+  <img src="img/fonts.jpg" alt="a list of calligraphy fonts">
+  <!--img src="img/girlkisser.jpg" alt="some text that says girl kisser"-->
+  <img src="img/happybirthday.jpg" alt="calligraphy of a happy birthday wish">
+  <img src="img/heatfromfire.jpg" alt="calligraphy of heat from fire">
+  <img src="img/charlie.jpg" alt="calligraphy of the name Charlie">
+  <img src="img/honeyskull.png" alt="a sketch of a beehive in a skull">
+  <img src="img/paruko.jpg" alt="harmony from splatoon">
+  <img src="img/clefairy.jpg" alt="a clefairy">
+  <img src="img/gymnast.jpg" alt="an olympic gymnast">
+  <img src="img/patches.jpg" alt="a patchwork stuffed dog">
+  <img src="img/birb.jpg" alt="a round bird">
+  <img src="img/riceball.jpg" alt="a riceball in the shape of a cat">
+  <img src="img/diver.jpg" alt="a vintage deepsea diver suit">
+  <img src="img/pisces.jpg" alt="twin mermaids">
+  <img src="img/splat.jpg" alt="a splat on a paper towel">
+  <img src="img/tugger.jpg" alt="the Rum Tum Tugger">
+  </div>
+</body>
+
+</html>
