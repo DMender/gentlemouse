@@ -39,3 +39,12 @@ img {
     max-width: 900px;
     max-width: 80vw;
 }
+@media only screen and (max-width: 600px) {
+    img {
+        max-width: 60vw;
+        margin-left: 5vw;
+    }
+    .full {
+        margin-left: 0vw;
+    }
+}
