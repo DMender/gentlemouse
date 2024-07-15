@@ -37,4 +37,5 @@ img {
 .full {
     max-height: 700px;
     max-width: 900px;
+    max-width: 80vw;
 }
